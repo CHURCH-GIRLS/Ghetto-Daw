@@ -1,17 +1,11 @@
 const express = require('express')
-const hbs = require('express-handlebars')
+
+const port = process.env.PORT || 3000
 
 const server = express()
-
-server.engine('hbs', hbs({
-  defaultLayout: 'main',
-  extname: 'hbs'
-}))
-server.set('view engine', 'hbs')
 server.use(express.static('public'))
-server.use(express.urlencoded({extended: false}))
 
-server.get('/',(req, res) => {
-  res.render('theGoods')
+server.listen(port, () => {
+  // eslint-disable-next-line no-console
+  console.log('Listening on port', port)
 })
-module.exports = server

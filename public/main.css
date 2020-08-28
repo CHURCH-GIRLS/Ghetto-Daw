@@ -1,8 +1,11 @@
+
+
 body {
   background-color: #2c2c2c93;
   font-family: 'Impact', 'Charcoal', 'sans-serif';
   background-image: url('/images/skull0.gif');
   background-size: cover;
+  text-align: center;
 }
 
 .container {
@@ -16,20 +19,6 @@ body {
   flex-direction: column;
 }
 
-.puppy-list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 50px;
-}
-
-.puppy {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 50px;
-}
-
 .img-circle {
   border-radius: 50%;
   object-fit: cover;
@@ -39,11 +28,11 @@ body {
 
 .title {
   text-align: center;
+  color: rgba(0, 0, 0, 0.603) ;
 }
 
 .nav {
   text-align: center;
-  color: black;
 }
 
 .form {
@@ -58,6 +47,7 @@ h1 {
   padding: 5px 5px 5px;
   margin: 5px 5px 5px;
   font-family: 'Staatliches-Regular';
+  color: rgba(0, 0, 0, 0.603) ;
 }
 
 table {
@@ -82,3 +72,27 @@ td {
 }
 
 
+div#audio_player {
+width:500px;
+height:60px;
+background:rgba(255, 255, 255, 0);
+padding:5px;
+margin:50px auto;
+}
+
+div#audio_player > div > audio {
+  width:500px; background:rgba(255, 255, 255, 0); float:left; 
+}
+
+div#audio_player > canvas {
+  width:500px; 
+  height:30px;
+  background:#dfa9d7c4;
+  float:left; 
+}
+
+a {
+  text-align:center;
+  text-decoration: line-through;
+  color: rgba(0, 0, 0, 0.603) ;
+}

@@ -128,3 +128,56 @@ function advanceStepPHOEBE () {
 	cellsPHOEBE[indexPHOEBE].classList.add("executing")
 }
 function isPlaying(audelem) { return !audelem.paused; }
+
+
+
+
+//AUDIO VISUALIZER
+
+var audio = new Audio()
+audio.src = './exile.mp3' // <-- this should be set to browser audio output \\
+audio.controls = true
+audio.loop = false
+audio.autoplay = false // maybe this should be true / maybe wont even need it \\ 
+
+var canvas, ctx, source, context, analyser, fbc_array, bars, bars_x, bars_width, bar_height
+
+	//initialize the mp3 player after the page loads all of its html into the window \\
+
+window.addEventListener('load', initAudioPlayer, false)
+
+function initAudioPlayer() {
+	document.getElementById('audio_box').appendChild(audio)
+	context = new AudioContext()
+	analyser = context.createAnalyser()
+	canvas = document.getElementById('analyser')
+	ctx = canvas.getContext('2d')
+
+	// re-route audio playback into the processing graph of AudioContext \\
+
+	source = context.createMediaElementSource(audio)
+	source.connect(analyser)
+	analyser.connect(context.destination)
+	frameLooper()
+}
+
+function frameLooper() {
+	window.requestAnimationFrame(frameLooper)
+	fbc_array = new Uint8Array(analyser.frequencyBinCount)
+	analyser.getByteFrequencyData(fbc_array)
+	ctx.clearRect(0, 0, canvas.width, canvas.height) //clear the canvas \\
+	ctx.fillstyle = '#00CCFF' // color of bars \\
+	bars = 100 // nummber of bars \\
+	for (var i = 0; i < bars; i++) {
+		bar_x = i * 3;
+		bars_width = 2;
+		bar_height = - (fbc_array [i] / 2 )
+
+		// fillrect( x, y, width, height )	\\ 
+		ctx.fillRect(bars_x, canvas.height, bars_width, bar_height)
+	}
+}
+
+
+
+
